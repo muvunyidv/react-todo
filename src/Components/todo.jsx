@@ -2,7 +2,6 @@ import { useState } from "react";
 
 function TodoList() {
   const [tasks, setTasks] = useState([]);
-
   const [newTask, setNewTask] = useState("");
 
   const handleInputChange = (e) => {
@@ -10,8 +9,8 @@ function TodoList() {
   };
 
   const addTask = () => {
-    if (newTask.trim() === "") return;
-    setTasks([...tasks, newTask]);
+    if (newTask.trim() === "" || tasks.includes(newTask.trim())) return;
+    setTasks([...tasks, newTask.trim()]);
     setNewTask("");
   };
 
@@ -30,7 +29,6 @@ function TodoList() {
           value={newTask}
           onChange={handleInputChange}
         />
-
         <button
           onClick={addTask}
           className="bg-green-500 text-white p-2 rounded hover:bg-green-700 cursor-pointer"
@@ -38,14 +36,13 @@ function TodoList() {
           Save
         </button>
       </div>
-
       <div className="flex-1 w-[100%] ml-5 bg-gray-100 p-5 rounded-lg shadow-lg">
         <h2 className="text-center font-bold text-xl mb-4">To-Do List</h2>
         <table className="w-full bg-white shadow-lg rounded-lg">
           <thead className="bg-green-500">
             <tr>
               <th className="p-2">No</th>
-              <th className="p-2">Task</th>
+              <th className="p-2">Todos</th>
               <th className="p-2">Actions</th>
             </tr>
           </thead>
